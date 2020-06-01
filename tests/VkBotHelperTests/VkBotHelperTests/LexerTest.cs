@@ -15,7 +15,7 @@ namespace VkBotHelperTests
                 ("#дата", TokenType.DatePlaceholder),
                 ("#время", TokenType.TimePlaceholder),
                 ("#строка", TokenType.StringLiteralPlaceholder),
-                ("#дробное_число", TokenType.DoubleLiteralPlaceholder),
+                ("#число", TokenType.DoubleLiteralPlaceholder),
                 ("#обращение", TokenType.AtSignPlaceholder),
                 ("#день_смещение", TokenType.FromTodayOffsetPlaceholder),
                 ("#день_недели", TokenType.DayOfWeekOffsetPlaceholder)

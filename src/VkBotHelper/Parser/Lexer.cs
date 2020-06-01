@@ -155,7 +155,7 @@ namespace VkBotHelper.Parser
 
             var hasDateTag = false;
             var hasTimeTag = false;
-            var hasDoubleTag = false;
+            var hasPrefix = false;
 
             var done = false;
             while (!done)
@@ -181,15 +181,17 @@ namespace VkBotHelper.Parser
                     case '-' when length == 0:
                     case '+' when length == 0:
                         Debug.Assert(char.IsDigit(_reader.Peek(1)));
+                        hasPrefix = true;
                         length++;
                         break;
 
                     /**
-                     * Формат #дата поддерживает следующие виды разделяющих символов: 01/01/2001 или 01-01-2001.
+                     * Формат #дата поддерживает следующие виды разделяющих символов: 01/01/2001 или 01-01-2001 или 01.01.2001.
                      * Символ '-' при этом относим к возможным символам даты только если он не является первым
                      */
                     case '/':
                     case '-' when length != 0:
+                    case '.':
                         hasDateTag = true;
                         length++;
                         break;
@@ -203,16 +205,6 @@ namespace VkBotHelper.Parser
                         hasTimeTag = true;
                         break;
 
-                    /**
-                     * #дробное_число задаётся через точку или запятую
-                     */
-                    case '.':
-                    case ',':
-                        Debug.Assert(length != 0); // символ ',' также не может быть первым.
-                        length++;
-                        hasDoubleTag = true;
-                        break;
-
                     default:
                         done = true;
                         break;
@@ -222,7 +214,7 @@ namespace VkBotHelper.Parser
             var scannedText = _reader.Substring(length);
             _reader.Advance(length);
 
-            if (hasDateTag)
+            if (hasDateTag && !hasPrefix)
             {
                 if (DateTime.TryParse(scannedText, out DateTime dateValue))
                 {
@@ -235,7 +227,7 @@ namespace VkBotHelper.Parser
                     _curScanned = new Token(TokenType.Unknown);
                 }
             }
-            else if (hasTimeTag)
+            else if (hasTimeTag && !hasPrefix)
             {
                 if (TimeSpan.TryParse(scannedText, out var timeValue))
                 {
@@ -247,7 +239,7 @@ namespace VkBotHelper.Parser
                     _curScanned = new Token(TokenType.Unknown);
                 }
             }
-            else if (hasDoubleTag)
+            else
             {
                 if (double.TryParse(scannedText, out var doubleValue))
                 {
@@ -256,18 +248,6 @@ namespace VkBotHelper.Parser
                 else
                 {
                     // TODO: добавить в токен информацию об ошибке разбора вещественного числа.
-                    _curScanned = new Token(TokenType.Unknown);
-                }
-            }
-            else
-            {
-                if (long.TryParse(scannedText, out var longValue))
-                {
-                    _curScanned = new TokenWithValue<long>(longValue, TokenType.LongLiteral);
-                }
-                else
-                {
-                    // TODO: добавить в токен информацию об ошибке разбора целого числа.
                     _curScanned = new Token(TokenType.Unknown);
                 }
             }
@@ -671,7 +651,7 @@ namespace VkBotHelper.Parser
                 "#дата" => new Token(TokenType.DatePlaceholder),
                 "#время" => new Token(TokenType.TimePlaceholder),
                 "#строка" => new Token(TokenType.StringLiteralPlaceholder),
-                "#дробное_число" => new Token(TokenType.DoubleLiteralPlaceholder),
+                "#число" => new Token(TokenType.DoubleLiteralPlaceholder),
                 "#обращение" => new Token(TokenType.AtSignPlaceholder),
                 "#день_смещение" => new Token(TokenType.FromTodayOffsetPlaceholder),
                 "#день_недели" => new Token(TokenType.DayOfWeekOffsetPlaceholder),
