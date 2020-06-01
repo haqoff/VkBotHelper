@@ -1,6 +1,4 @@
-﻿using System.Diagnostics;
-
-namespace VkBotHelper.Parser.Tokens.Values
+﻿namespace VkBotHelper.Parser.Tokens.Values
 {
     /// <summary>
     /// Представляет собой обращение @ ВКонтакте.

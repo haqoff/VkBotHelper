@@ -17,7 +17,6 @@
         Plus,
         Date,
         DoubleLiteral,
-        LongLiteral,
         Time,
         FromTodayOffset,
         DayOfWeekOffset,
