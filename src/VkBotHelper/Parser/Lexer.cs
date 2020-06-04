@@ -174,6 +174,8 @@ namespace VkBotHelper.Parser
                     case '7':
                     case '8':
                     case '9':
+                        length++;
+                        break;
                     /**
                      * Можем считывать эти символы, только когда они являются первыми
                      * и после них обязательно идёт цифра - в ScanSource до этого уже была такая проверка.
@@ -203,6 +205,14 @@ namespace VkBotHelper.Parser
                         Debug.Assert(length != 0); // символ ':' не может быть первым, но этого не должен допускать ScanSource 
                         length++;
                         hasTimeTag = true;
+                        break;
+
+                    /*
+                     * #число может быть дробным и задаваться через запятую,
+                     * которую учитываем, если за ней цифра
+                     */
+                    case ',' when char.IsDigit(_reader.Peek(length + 1)):
+                        length++;
                         break;
 
                     default:
