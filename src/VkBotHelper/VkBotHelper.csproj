@@ -2,10 +2,12 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <Description>VkBotHelper - производительная .NET Core библиотека , которая поможет вам создать бота для любых бесед или диалогов в виде меню или текстовых команд со сложной логикой. Причём, обработчики команд могут быть как и ассинхронные (async/await), так и синхронные. Команды задаются с помощью атрибутов [Command("шаблон команды")] над соответсвующими методами-обработчиками. Библиотека поддерживает Dependency Injection через Unity. Взаимодействие с Api-ВКонтакте происходит путём библиотеки VkNet.</Description>
+    <Description>VkBotHelper - производительная .NET Core библиотека , которая поможет вам создать бота для любых бесед или диалогов в виде меню или текстовых команд со сложной логикой. Причём, обработчики команд могут быть как и ассинхронные (async/await), так и синхронные. Команды задаются с помощью атрибутов [Command("шаблон команды")] над соответсвующими методами-обработчиками. Библиотека поддерживает Dependency Injection через Unity. Взаимодействие с Api-ВКонтакте происходит путём библиотеки VkNet.
+Документация: https://github.com/haqoff/VkBotHelper</Description>
     <Authors>haqoff</Authors>
     <RepositoryUrl>https://github.com/haqoff/VkBotHelper</RepositoryUrl>
     <PackageTags>vk,bot,helper,vkapi,вконтакте,vkbot</PackageTags>
+    <Version>1.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
