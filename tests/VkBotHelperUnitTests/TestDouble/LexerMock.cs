@@ -1,7 +1,7 @@
 ﻿using VkBotHelper.Parser;
 using VkBotHelper.Parser.Tokens;
 
-namespace VkBotHelperTests.TestDouble
+namespace VkBotHelperUnitTests.TestDouble
 {
     public class LexerMock : ISourceLexer, IPatternLexer
     {

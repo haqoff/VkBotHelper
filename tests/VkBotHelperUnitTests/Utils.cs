@@ -1,7 +1,7 @@
 ﻿using VkBotHelper.Command.Tree;
 using VkBotHelper.Parser.Tokens;
 
-namespace VkBotHelperTests
+namespace VkBotHelperUnitTests
 {
     public static class Utils
     {

@@ -3,10 +3,10 @@ using VkBotHelper.Command.Tree;
 using VkBotHelper.Parser.Tokens;
 using VkBotHelper.Parser.Tokens.Values;
 using VkBotHelper.Parser.Tokens.Values.Containers;
-using VkBotHelperTests.TestDouble;
+using VkBotHelperUnitTests.TestDouble;
 using Xunit;
 
-namespace VkBotHelperTests.Tree
+namespace VkBotHelperUnitTests.Tree
 {
     /// <summary>
     /// Класс для тестирования алгоритма обхода дерева с получением значений.

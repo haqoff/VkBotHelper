@@ -1,9 +1,9 @@
 ﻿using VkBotHelper.Command.Tree;
 using VkBotHelper.Parser.Tokens;
-using VkBotHelperTests.TestDouble;
+using VkBotHelperUnitTests.TestDouble;
 using Xunit;
 
-namespace VkBotHelperTests.Tree
+namespace VkBotHelperUnitTests.Tree
 {
     public class TreeCreateNodesTest
     {

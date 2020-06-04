@@ -5,7 +5,7 @@ using VkBotHelper.Command.Tree;
 using VkBotHelper.Menu;
 using Xunit;
 
-namespace VkBotHelperTests.Tree
+namespace VkBotHelperUnitTests.Tree
 {
     public class CommandTreeBuilderTest
     {

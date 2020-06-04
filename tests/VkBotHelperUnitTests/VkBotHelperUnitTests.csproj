@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\src\VkBotHelper\VkBotHelper.csproj" />
+    <ProjectReference Include="..\..\src\VkBotHelper\VkBotHelper.csproj" />
   </ItemGroup>
 
 </Project>

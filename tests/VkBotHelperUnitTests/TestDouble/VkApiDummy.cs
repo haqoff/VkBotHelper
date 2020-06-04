@@ -17,7 +17,7 @@ using VkNet.Utils;
 using VkNet.Utils.AntiCaptcha;
 using Xunit;
 
-namespace VkBotHelperTests.TestDouble
+namespace VkBotHelperUnitTests.TestDouble
 {
     class VkApiDummy : IVkApi
     {
