@@ -1,5 +1,6 @@
 ﻿using System;
 using Unity;
+using Unity.Lifetime;
 using VkBotHelper.Command.Tree;
 using VkBotHelper.Manager;
 using VkNet;
@@ -33,9 +34,9 @@ namespace VkBotHelper.Helper
             var commandManager = new CommandManager(unity, treeBuilder.Build());
             var updateListener = new VkUpdateListener(vkApi, groupId);
 
-            unity.RegisterInstance(vkApi);
-            unity.RegisterInstance(updateListener);
-            unity.RegisterInstance(commandManager);
+            unity.RegisterInstance<IVkApi>(vkApi, new SingletonLifetimeManager());
+            unity.RegisterInstance<IVkUpdateListener>(updateListener, new SingletonLifetimeManager());
+            unity.RegisterInstance<ICommandManager>(commandManager, new SingletonLifetimeManager());
 
             updateListener.OnUpdateHappened += commandManager.HandleUpdate;
             updateListener.Start();
