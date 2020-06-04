@@ -13,29 +13,32 @@
 ````csharp
     public class SimpleCommand
     {
-		private readonly IVkApi _api;
+	private readonly IVkApi _api;
 		
-		/* 
-		* конструктор класса, здесь указываете нужные зависимости для
-		* ваших команд. Зависимости должны быть зарегестрированы
-		* в Unity (подробнее ниже).
-		*/
-		SimpleCommand(IVkApi api)
-		{
-			// IVkApi - предназначается для работы с API Вконтакте.
-			_api = api;
-		}
+	/* 
+	* конструктор класса, здесь указываете нужные зависимости для
+	* ваших команд. Зависимости должны быть зарегестрированы
+	* в Unity (подробнее ниже).
+	*/
+	public SimpleCommand(IVkApi api)
+	{
+	    // IVkApi - предназначается для работы с API Вконтакте.
+	    _api = api;
+	}
 	
-		// аттрибут команды. Первый аргумент - шаблон команды, второй - признак того, что команда является глобальной. Подробнее о аттрибуте смотрите ниже.
+	/* 
+	* Аттрибут команды. Первый аргумент - шаблон команды, 
+        * второй - признак того, что команда является глобальной. Подробнее о аттрибуте смотрите ниже. 
+        */
         [Command(".привет", true)]
         public void Hi(CommandArgs args)
         {
-        	 _api.Messages.Send(new MessagesSendParams
-             	{
-					Message = "привет-привет",
-					PeerId = args.SourceMessage.PeerId,
-					RandomId = new Random().Next()
-				});
+            _api.Messages.Send(new MessagesSendParams
+            {
+	        Message = "привет-привет",
+	        PeerId = args.SourceMessage.PeerId,
+	        RandomId = new Random().Next()
+	    });
         }
 }
 ````
@@ -46,19 +49,19 @@
 VkBot.StartNewCommandBot("Токен Группы", id группы, 
 	builder =>
 	{
-		//здесь регистрируем классы, в которых лежат обработчики команд
-		builder.Register<SimpleCommand>();
+	    //здесь регистрируем классы, в которых лежат обработчики команд
+	    builder.Register<SimpleCommand>();
 	},
 	container =>
 	 {
-		/* здесь регистрируем любые зависимости, 
-		* например контекст базы данных, нужные сервисы и так далее,
-		* которые будут передаваться в конструкторы классов команд.
-		* по умолчанию уже зарегистрированы некоторые зависимости,
-		* например, IVkApi.
-		*
-		* Поэтому здесь нам больше ничего не нужно.
-		*.
+	     /* здесь регистрируем любые зависимости, 
+	     * например контекст базы данных, нужные сервисы и так далее,
+	     * которые будут передаваться в конструкторы классов команд.
+	     * по умолчанию уже зарегистрированы некоторые зависимости,
+	     * например, IVkApi.
+	     *
+	     * Поэтому здесь нам больше ничего не нужно.
+	     *.
 	});`
 ````
 
@@ -79,7 +82,7 @@ VkBot.StartNewCommandBot("Токен Группы", id группы,
         [Command(".показать #дата", true)]
         public void Show(CommandArgs args)
         {
-			// значение
+	    // значение
             var date = args.ValueContainer.Get<Date>(0);
         }
 ```
@@ -159,9 +162,9 @@ class DeleteItemCommand
     {
         private readonly ICommandManager _manager;
         private readonly IVkApi _api;
-		private int counter = 0;
+	private int counter = 0;
 
-		//подключаем ICommandManager для управления командами
+	//подключаем ICommandManager для управления командами
         public DeleteItemCommand(ICommandManager manager, IVkApi api)
         {
             _manager = manager;
@@ -171,7 +174,7 @@ class DeleteItemCommand
         [Command(".удалить", true)]
         public void Question(CommandArgs args)
         {
-			// устанавливаем текущую команду как активную
+	    // устанавливаем текущую команду как активную
             _manager.SetActiveCommand(args.SourceMessage.PeerId.Value, args.RunMetadata, this);
 
             _api.Messages.Send(new MessagesSendParams()
@@ -181,26 +184,26 @@ class DeleteItemCommand
                 RandomId = new Random().Next()
             });
 
-			counter = 5;
+	    counter = 5;
         }
 
         [Command(".да", false)]
         public void Yes(CommandArgs args)
         {
-           //удаляем активную команду
-		   _manager.RemoveActiveCommand(args.SourceMessage.PeerId.Value);
+            //удаляем активную команду
+	    _manager.RemoveActiveCommand(args.SourceMessage.PeerId.Value);
 			
             // реагируем на ответ
-			// counter будет равен 5, состояние в контекстных командах сохраняется.
+	    // counter будет равен 5, состояние в контекстных командах сохраняется.
         }
 
         [Command(".нет", false)]
         public void No(CommandArgs args)
         {
-           //удаляем активную команду
-		   _manager.RemoveActiveCommand(args.SourceMessage.PeerId.Value);
+            //удаляем активную команду
+	    _manager.RemoveActiveCommand(args.SourceMessage.PeerId.Value);
 
             // реагируем на ответ
-			// counter будет равен 5, состояние в контекстных командах сохраняется.
+	    // counter будет равен 5, состояние в контекстных командах сохраняется.
         }
 ```
